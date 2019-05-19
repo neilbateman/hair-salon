@@ -1,0 +1,40 @@
+.container {
+  padding: 50px;
+  padding-top: 10px;
+  background-color: lightblue;
+  color: magenta;
+  margin: auto;
+  width: 100%;
+  margin-top: 20px;
+  visibility: visible;
+
+
+}
+
+img {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 25%;
+
+}
+
+h1{
+  color:blue;
+}
+
+/*article {
+  color: white;
+  float: left;
+  padding: 0px;
+  width: 70%;
+  height: 300px;
+
+}
+
+@media (max-width: 600px) {
+  nav, article {
+    width: 100%;
+    height: auto;
+  }
+}
