@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Hair Salon Database</title>
+</head>
+<body>
+  <div>
+      <h1>Hair Salon Database</h1>
+    <h5>Current clients:</h5><br>
+    @if(Model["clients"].Count == 0)
+    {
+      <p>No clients in database.</p>
+    }
+    @if(Model["clients"].Count != 0)
+    {
+      @foreach (var client in @Model["clients"])
+      {
+        <p><a href="/stylists/@Model["stylist"].Id/clients/@client.Id">@client.Name</a></p>
+      }
+    }
+    <p><a href="/stylists/@Model["stylist"].Id/clients/new">Add a new client</a></p>
+    <p><a href="/stylists">Back to stylist list</a></p>
+    <!-- <form action="/stylists/@Model["stylist"].Id/delete" method="post">
+      <button type="submit">Delete client</button> -->
+    </form>
+    <p><a href="/">Home</a></p>
+  </div>
+</body>
+</html>
