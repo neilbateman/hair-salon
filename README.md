@@ -17,7 +17,7 @@ _a program that allows hair salon employees to enter stylists and clients into a
 
 ## Specs
 
-| Behavior | Input | Output | 
+| Behavior | Input | Output |
 | ------------- |:-------------:| -----:|
 | Create a new stylist | "La-a" | "La-a" added to database |
 | add a client to a stylist | Jim | Jim is client of La-a |
@@ -34,7 +34,7 @@ _Contact me at neilbatman@gmail.com for any issues or feedback_
 
 ## Technologies Used
 
-_C#, HTML, MySQL, phpMyAdmin, PowerShell,.NET_
+_C#, HTML, CSS, bootsrap, MySQL, phpMyAdmin, PowerShell,.NET_
 
 ### License
 
