@@ -3,11 +3,15 @@
 <head>
 
   <title>Hair Salon Database</title>
+  <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="~/css/styles.css" type="text/css">
+
 </head>
 <body>
-  <div>
+  <div class="container">
+    <div class="jumbotron">
       <h1>Hair Salon Database</h1>
-    <h5>Current clients:</h5><br>
+    <h5>Current clients:</h5>
     @if(Model["clients"].Count == 0)
     {
       <p>No clients in database.</p>
@@ -16,15 +20,16 @@
     {
       @foreach (var client in @Model["clients"])
       {
-        <p><a href="/stylists/@Model["stylist"].Id/clients/@client.Id">@client.Name</a></p>
+        <p><a href="/stylists/@Model["stylist"].Id/clients/@client.Id" class="btn btn-primary btn-block">@client.Name</a></p>
       }
     }
-    <p><a href="/stylists/@Model["stylist"].Id/clients/new">Add a new client</a></p>
-    <p><a href="/stylists">Back to stylist list</a></p>
+    <p><a href="/stylists/@Model["stylist"].Id/clients/new" class="btn btn-primary btn-block">Add a new client</a></p>
+    <p><a href="/stylists" class="btn btn-primary btn-block">Back to stylist list</a></p>
     <!-- <form action="/stylists/@Model["stylist"].Id/delete" method="post">
       <button type="submit">Delete client</button> -->
-    </form>
-    <p><a href="/">Home</a></p>
+    <!-- </form> -->
+    <p><a href="/" class="btn btn-primary btn-block">Home</a></p>
   </div>
+</div>
 </body>
 </html>

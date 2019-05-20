@@ -1,6 +1,6 @@
 .container {
   padding: 50px;
-  padding-top: 10px;
+  padding-top: 60px;
   background-color: lightblue;
   color: magenta;
   margin: auto;
@@ -11,26 +11,50 @@
 
 }
 
-img {
-  display: none;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%;
-
-}
 
 h1{
   color:blue;
 }
 
-/*article {
+/* a, button[type=submit] {
+     background-color: red;
+  color: white;
+  padding: 1em 1.5em;
+  text-decoration: none;
+  text-transform: uppercase;
+
+}
+
+a, button[type=submit]:hover {
+  background-color: #555;
+}
+
+a, button[type=submit]:active {
+   background-color: black;
+}
+
+a, button[type=submit]:visited {
+  background-color: #ccc; */
+
+/* .button, button[type=submit] {
+    font: bold 11px Arial;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+  } */
+/* article {
   color: white;
   float: left;
   padding: 0px;
   width: 70%;
   height: 300px;
 
-}
+} */
 
 @media (max-width: 600px) {
   nav, article {

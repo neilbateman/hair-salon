@@ -2,20 +2,24 @@
 <html>
 <head>
   <title>Hair Salon Database</title>
+  <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="~/css/styles.css" type="text/css">
 </head>
 <body>
-  <div>
+  <div class="container">
+    <div class="jumbotron">
       <h1>Hair Salon Database</h1>
-    <h5>Contact information for @Model["client"].Name</h5><br>
+    <h5>Contact information for @Model["client"].Name</h5>
     <p>Phone Number: @Model["client"].PhoneNumber</p>
     <p>Email Address: @Model["client"].EmailAddress</p>
-    <p>Stylist: @Model["stylist"].Name</p><br>
-    <form action="/stylists/@Model["stylist"].Id/clients/@Model["client"].Id/delete" method="post">
-      <button type="submit">Delete client</button>
-    </form>
-    <p><a href='/stylists/@Model["stylist"].Id/clients/@Model["client"].Id/edit'>Edit client</a></p>
-    <p><a href="/stylists/@Model["stylist"].Id">Back to client list</a></p>
-    <p><a href="/">Home</a></p>
+    <p>Stylist: @Model["stylist"].Name</p>
+    <p><form action="/stylists/@Model["stylist"].Id/clients/@Model["client"].Id/delete" method="post">
+      <button type="submit" class="btn btn-primary btn-block">Delete client</button>
+    </form></p>
+    <p><a href='/stylists/@Model["stylist"].Id/clients/@Model["client"].Id/edit' class="btn btn-primary btn-block">Edit client</a></p>
+    <p><a href="/stylists/@Model["stylist"].Id" class="btn btn-primary btn-block">Back to client list</a></p>
+    <p><a href="/" class="btn btn-primary btn-block">Home</a></p>
   </div>
+</div>
 </body>
 </html>
