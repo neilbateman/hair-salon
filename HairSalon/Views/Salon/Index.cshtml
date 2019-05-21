@@ -1,0 +1,37 @@
+@using HairSalon.Models;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hair Salon Database</title>
+  <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="~/css/styles.css" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+
+    <h1>Hair Salon Database</h1>
+
+    <ul>
+      @if (Model.Count == 0)
+      {
+        <p>No salons have been added yet. Click the button below to add a salon.</p>
+      }
+      @if(Model.Count != 0)
+      {
+        @foreach (Salon salon in Model)
+        {
+          <h5>@salon.Name</h5>
+          <h5>@salon.Description</h5>
+          <li><a href="/salons/@salon.Id">@salon.Name @salon.</a></li>
+        }
+      }
+    </ul>
+
+    <hr>
+    <p><a href="/salons/new" class="btn btn-primary btn-block">Add a new salon</a></p>
+    <p><a href="/" class="btn btn-primary btn-block">Home</a></p>
+  </div>
+</div>
+</body>
+</html>
