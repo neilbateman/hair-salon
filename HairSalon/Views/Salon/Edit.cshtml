@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hair Salon Database</title>
+  <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="~/css/styles.css" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Hair salon database</h1>
+    </div>
+    <h5>Update salon:</h5><br>
+    <form action='/salons/@Model.Id/edit' method='post'>
+      <label for="newName">Salon name:</label><br>
+      <input id="newName" name="newName" type="text" value="@Model.Name"><br>
+      <label for="newSalonDescription">About: </label><br>
+      <textarea rows="5" cols="80" id="newSalonDescription" name="newSalonDescription" value="@Model.Description" required>
+      </textarea><br>
+      <button type='submit'"btn btn-primary btn-block">Save Changes</button>
+    </form>
+    <div id="space">
+    </div>
+    <hr>
+  <a href="/""btn btn-primary btn-block">Home</a>
+  </div>
+</body>
+</html>

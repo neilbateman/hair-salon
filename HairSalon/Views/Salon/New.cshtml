@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hair Salon Database</title>
+  <link rel="stylesheet" href="~/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="~/css/styles.css" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+        <h1>Hair Salon Database</h1>
+</div>
+<div class="row">
+  <div class="col-md-8"><h5>Add a salon:</h5>
+  <form action="/salons" method="post">
+    <label for="name">Name of salon: </label>
+    <input id="name" name="name" type="text" required><br>
+    <div class="form-group">
+      <label for="description">Description of salon: </label>
+      <input id="description" name="description" type="textbox" required><br>
+    </div>
+
+
+
+  </div>
+  <div class="col-md-4"><button type="submit"class="btn btn-primary btn-block">Add</button>
+</form><br>
+
+<p><a href="/salons" class="btn btn-primary btn-block">Back to stylist list</a></p>
+<p><a href="/" class="btn btn-primary btn-block">Home</a></p></div>
+</div>
+    </div>
+
+
+  </div>
+</body>
+</html>
