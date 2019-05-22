@@ -52,7 +52,13 @@ namespace HairSalon.Controllers
             model.Add("stylist", foundStylist);
             return View("Show", model);
         }
-
+        [HttpPost("/stylists/{stylistId}/add-salon")]
+     public ActionResult AddSalon(int stylistId, int id)
+     {
+         Stylist foundStylist = Stylist.Find(stylistId);
+         foundStylist.AddSalon(id);
+         return RedirectToAction("Show", new {id = stylistId});
+     }
         // [HttpPost("/stylists/{stylistId}/delete")]
         // public ActionResult Delete(int stylistId, int clientId)
         // {

@@ -20,9 +20,21 @@
     {
       @foreach (var client in @Model["clients"])
       {
-        <p><a href="/stylists/@Model["stylist"].Id/clients/@client.Id" class="btn btn-primary btn-block">@client.Name</a></p>
+        <p><a href="/stylists/@Model["stylist"].Id/clients/@client.Id" class="btn btn-primary btn-block">@client.Name</a></p><br>
       }
     }
+    <!-- <h2>Add a salon to this stylist:</h2> -->
+               <form action="/stylists/@Model["stylist"].Id/add-salon" method="post" >
+                 <!-- <select name='id' type='number'><option value = 0>None</option> -->
+
+                 </select>
+                 <button type="submit" class="btn btn-primary btn-block">Add a salon for this stylist</button>
+               </form>
+
+
+
+
+
     <p><a href="/stylists/@Model["stylist"].Id/clients/new" class="btn btn-primary btn-block">Add a new client</a></p>
     <p><a href="/stylists" class="btn btn-primary btn-block">Back to stylist list</a></p>
     <!-- <form action="/stylists/@Model["stylist"].Id/delete" method="post">

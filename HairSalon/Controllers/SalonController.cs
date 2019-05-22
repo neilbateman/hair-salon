@@ -33,20 +33,31 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/salons")]
-    public ActionResult Create(string salonName, string description)
+    public ActionResult Create(string name, string description)
     {
-      Salon newSalon = new Salon(salonName, description);
+      Salon newSalon = new Salon(name, description);
       newSalon.Save();
       List<Salon> allSalons = Salon.GetAll();
       return View("Index", allSalons);
     }
-
-
+    [HttpPost("/salons/delete-salons")]
+      public ActionResult DeleteSalons(int salonId)
+      {
+          Salon.ClearAll();
+          return RedirectToAction("Index");
+      }
+      [HttpPost("/salons/{salonId}/delete-salon")]
+      public ActionResult Delete(int salonId)
+      {
+          Salon selectedSalon = Salon.Find(salonId);
+          selectedSalon.DeleteSalon();
+          return RedirectToAction("Index");
+      }
 
     [HttpPost("/salons/{salonId}/stylists/new")]
-    public ActionResult Create(int stylistId, int salonId)
+    public ActionResult AddStylist(int stylistId, int salonId)
     {
-      Salon foundSalon = Salon.Find(salonId);
+      Salon salon = Salon.Find(salonId);
       Stylist stylist = Stylist.Find(stylistId);
       salon.AddStylist(stylist);
       return RedirectToAction("Show", new {id = salonId});

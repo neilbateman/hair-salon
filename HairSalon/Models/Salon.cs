@@ -6,16 +6,61 @@ namespace HairSalon.Models
 {
   public class Salon
   {
-    public string SalonName {get; set;}
+    public string Name {get; set;}
     public string Description {get; set;}
     public int Id {get; set;}
 
-    public Salon (string salonName, string description, int id = 0)
+    public Salon (string name, string description, int id = 0)
     {
-      SalonName = salonName;
+      Name = name;
       Description = description;
       Id = id;
     }
+    public static Salon Find(int id)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM salons WHERE id = (@searchId);";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = id;
+      cmd.Parameters.Add(searchId);
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int salonId = 0;
+      string name = "";
+      string salonDescription = "";
+      while(rdr.Read())
+      {
+        salonId = rdr.GetInt32(0);
+        name = rdr.GetString(1);
+        salonDescription = rdr.GetString(2);
+      }
+      Salon newSalon = new Salon(name,salonDescription,salonId);
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return newSalon;
+    }
+
+    public static void ClearAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM salons;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+
+
 
         public override bool Equals(System.Object otherSalon)
         {
@@ -27,9 +72,26 @@ namespace HairSalon.Models
             {
                 Salon newSalon = (Salon) otherSalon;
                 bool idEquality = (this.Id == newSalon.Id);
-                bool salonNameEquality = (this.SalonName == newSalon.SalonName);
+                bool nameEquality = (this.Name == newSalon.Name);
                 bool descriptionEquality = (this.Description == newSalon.Description);
-                return (idEquality && salonNameEquality && descriptionEquality);
+                return (idEquality && nameEquality && descriptionEquality);
+            }
+        }
+        public void DeleteSalon()
+        {
+            MySqlConnection conn = DB.Connection();
+            conn.Open();
+            var cmd = conn.CreateCommand() as MySqlCommand;
+            cmd.CommandText = @"DELETE FROM salons WHERE id = @search_id;";
+            MySqlParameter searchId = new MySqlParameter();
+            searchId.ParameterName = "@search_id";
+            searchId.Value = Id;
+            cmd.Parameters.Add(searchId);
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            if (conn != null)
+            {
+                conn.Dispose();
             }
         }
 
@@ -38,13 +100,13 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"INSERT INTO salons (salonName, description) VALUES (@salonName, @description);";
-            MySqlParameter salonName = new MySqlParameter();
-            salonName.ParameterSalonName = "@salonName";
-            salonName.Value = this.SalonName;
-            cmd.Parameters.Add(salonName);
+            cmd.CommandText = @"INSERT INTO salons (name, description) VALUES (@name, @description);";
+            MySqlParameter name = new MySqlParameter();
+            name.ParameterName = "@name";
+            name.Value = this.Name;
+            cmd.Parameters.Add(name);
             MySqlParameter description = new MySqlParameter();
-            description.ParameterSalonName = "@description";
+            description.ParameterName = "@description";
             description.Value = this.Description;
             cmd.Parameters.Add(description);
             cmd.ExecuteNonQuery();
@@ -64,14 +126,14 @@ namespace HairSalon.Models
             MySqlConnection conn = DB.Connection();
             conn.Open();
             var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM salons ORDER BY salonName;";
+            cmd.CommandText = @"SELECT * FROM salons ORDER BY name;";
             var rdr = cmd.ExecuteReader() as MySqlDataReader;
             while(rdr.Read())
             {
                 int salonId = rdr.GetInt32(0);
-                string salonName = rdr.GetString(1);
+                string name = rdr.GetString(1);
                 string salonDescription = rdr.GetString(2);
-                Salon newSalon = new Salon (salonName,salonDescription,salonId);
+                Salon newSalon = new Salon (name,salonDescription,salonId);
                 allSalons.Add(newSalon);
             }
             conn.Close();
@@ -135,50 +197,10 @@ namespace HairSalon.Models
             return stylists;
 
 
-        public static Salon Find(int id)
-        {
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"SELECT * FROM salons WHERE id = (@search_id);";
-            MySqlParameter searchId = new MySqlParameter();
-            searchId.ParameterSalonName = "@search_id";
-            searchId.Value = id;
-            cmd.Parameters.Add(searchId);
-            var rdr = cmd.ExecuteReader() as MySqlDataReader;
-            int salonId = 0;
-            string salonName = "";
-            string salonDescription = "";
-            while(rdr.Read())
-            {
-             salonId = rdr.GetInt32(0);
-             salonName = rdr.GetString(1);
-             salonDescription = rdr.GetString(2);
-            }
-            Salon newSalon = new Salon(salonName,salonDescription,salonId);
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
-            return newSalon;
-        }
-
-        public static void ClearAll()
-        {
-            MySqlConnection conn = DB.Connection();
-            conn.Open();
-            var cmd = conn.CreateCommand() as MySqlCommand;
-            cmd.CommandText = @"DELETE FROM salons;";
-            cmd.ExecuteNonQuery();
-            conn.Close();
-            if (conn != null)
-            {
-                conn.Dispose();
-            }
-        }
     }
 }
+}
+
 // public List<Client> GetClients()
 // {
 //   List<Client> allSalonClients = new List<Client> {};
@@ -187,18 +209,18 @@ namespace HairSalon.Models
 //   var cmd = conn.CreateCommand() as MySqlCommand;
 //   cmd.CommandText = @"SELECT * FROM clients WHEREsalon_id = @stylist_id;";
 //   MySqlParametersalonId = new MySqlParameter();
-//  salonId.ParameterSalonName = "@stylist_id";
+//  salonId.ParameterName = "@stylist_id";
 //  salonId.Value = this.Id;
 //   cmd.Parameters.Add(stylistId);
 //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
 //   while(rdr.Read())
 //   {
 //     int clientId = rdr.GetInt32(0);
-//     string clientSalonName = rdr.GetString(1);
+//     string clientName = rdr.GetString(1);
 //     string clientPhone = rdr.GetString(2);
 //     string clientEmail = rdr.GetString(3);
 //     int clientSalonId = rdr.GetInt32(4);
-//     Client newClient = new Client(clientSalonName, clientPhone, clientEmail, clientSalonId, clientId);
+//     Client newClient = new Client(clientName, clientPhone, clientEmail, clientSalonId, clientId);
 //     allSalonClients.Add(newClient);
 //   }
 //   conn.Close();

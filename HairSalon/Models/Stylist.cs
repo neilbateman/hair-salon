@@ -32,6 +32,28 @@ namespace HairSalon.Models
                 return (idEquality && nameEquality && detailsEquality);
             }
         }
+        public void AddSalon(int salonId)
+      {
+          MySqlConnection conn = DB.Connection();
+          conn.Open();
+          var cmd = conn.CreateCommand() as MySqlCommand;
+          cmd.CommandText = @"INSERT INTO stylists_salon (salon_id, stylist_id) VALUES (@salonId, @stylistId);";
+          MySqlParameter salonIdParam = new MySqlParameter();
+          salonIdParam.ParameterName = "@salonId";
+          salonIdParam.Value = salonId;
+          cmd.Parameters.Add(salonIdParam);
+          MySqlParameter stylistid = new MySqlParameter();
+          stylistid.ParameterName = "@stylistId";
+          stylistid.Value = this.Id;
+          cmd.Parameters.Add(stylistid);
+          cmd.ExecuteNonQuery();
+          Id = (int) cmd.LastInsertedId;
+          conn.Close();
+          if (conn != null)
+          {
+              conn.Dispose();
+          }
+      }
 
         public void Save()
         {
