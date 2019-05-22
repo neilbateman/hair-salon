@@ -40,13 +40,13 @@ namespace HairSalon.Controllers
       List<Salon> allSalons = Salon.GetAll();
       return View("Index", allSalons);
     }
-    [HttpPost("/salons/delete-salons")]
+    [HttpPost("/salons/delete")]
       public ActionResult DeleteSalons(int salonId)
       {
           Salon.ClearAll();
           return RedirectToAction("Index");
       }
-      [HttpPost("/salons/{salonId}/delete-salon")]
+      [HttpPost("/salons/{salonId}/delete")]
       public ActionResult Delete(int salonId)
       {
           Salon selectedSalon = Salon.Find(salonId);
