@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Generation Time: May 17, 2019 at 11:19 PM
+-- Generation Time: May 22, 2019 at 03:08 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.2.14
 
@@ -38,7 +38,20 @@ CREATE TABLE IF NOT EXISTS `clients` (
   `email_address` varchar(255) NOT NULL,
   `stylist_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `salons`
+--
+
+DROP TABLE IF EXISTS `salons`;
+CREATE TABLE IF NOT EXISTS `salons` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -52,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `stylists` (
   `name` varchar(255) NOT NULL,
   `details` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
